@@ -1,18 +1,14 @@
 import React from 'react';
-import NavBar from '../../components/NavBar/NavBar';
-import Hero from '../../components/Hero/Hero';
+import Banner from '../../components/Banner/Banner';
 import Features from '../../components/Features/Features';
-import Footer from '../../components/Footer/Footer';
 import './Home.css'
 
 const Home = () => (
   <>
-    <NavBar />
     <main>
-      <Hero />
+      <Banner />
       <Features />
     </main>
-    <Footer />
   </>
 );
 

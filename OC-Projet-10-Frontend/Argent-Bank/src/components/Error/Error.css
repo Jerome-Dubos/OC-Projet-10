@@ -1,0 +1,114 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #f1f1f4, #9a9abc);
+}
+
+.wrapper .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    position: relative;
+}
+
+.logo-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+}
+
+.logo-container img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.wrapper .container .scene {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    vertical-align: middle;
+}
+
+.wrapper .container .one,
+.wrapper .container .two,
+.wrapper .container .three,
+.wrapper .container .circle,
+.wrapper .container .p404 {
+    width: 60%;
+    height: 60%;
+    top: 20% !important;
+    left: 20% !important;
+    min-width: 400px;
+    min-height: 400px;
+}
+
+.wrapper .container .text {
+    width: 70%;
+    height: 40%;
+    min-width: 400px;
+    min-height: 500px;
+    position: absolute;
+    margin: 40px 0;
+}
+
+.wrapper .container .text article {
+    width: 700px;
+    position: absolute;
+    bottom: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wrapper .container .text article p {
+    color: #1d5d41;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+    margin-bottom: 40px;
+    text-shadow: 6px 6px 10px #32243E;
+}
+
+.wrapper .container .text article button {
+    height: 40px;
+    padding: 0 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0px 15px 20px rgba(54, 24, 79, 0.5);
+    z-index: 3;
+    color: #005636;
+    background-color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.wrapper .container .text article button:hover {
+    box-shadow: 0px 10px 10px -10px rgba(54, 24, 79, 0.5);
+    transform: translateY(5px);
+    background: #07b875;
+    color: white;
+}
+
+.wrapper .container .p404 {
+    font-size: 200px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #07b875;
+    text-shadow: 6px 6px 10px #1d5d41;
+    text-align: center;
+    margin-top: 50px;
+}

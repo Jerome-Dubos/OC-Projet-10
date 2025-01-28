@@ -1,7 +1,7 @@
 import React from 'react';
-import './Hero.css'
+import './Banner.css'
 
-const Hero = () => (
+const Banner = () => (
   <div className="hero">
     <section className="hero-content">
       <h2 className="sr-only">Promoted Content</h2>
@@ -11,4 +11,4 @@ const Hero = () => (
   </div>
 );
 
-export default Hero;
+export default Banner;

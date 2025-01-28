@@ -1,12 +1,9 @@
 import React from 'react';
 import './Sign-In.css'
-import NavBar from '../../components/NavBar/NavBar';
-import Footer from '../../components/Footer/Footer';
 
 const SignIn = () => {
   return (
     <>
-      <NavBar />
 
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -33,7 +30,6 @@ const SignIn = () => {
         </section>
       </main>
 
-<Footer />
     </>
   );
 };
