@@ -1,32 +1,39 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login, setUserProfile, setStatus, setError } from '../../store/userSlice';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, setUserProfile, setError, loadUserFromStorage } from '../../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import './Sign-In.css';
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setErrorMessage] = useState(null);
 
+  useEffect(() => {
+    dispatch(loadUserFromStorage());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email || '');
+      navigate('/user');
+    }
+  }, [user, navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const credentials = {
-      email: email,
-      password: password,
-    };
-
     try {
+      // 1. Login request
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
@@ -34,20 +41,22 @@ const SignIn = () => {
       }
 
       const data = await response.json();
-      const user = {
-        id: data.body?.id || null,
-        email: data.body?.email || null,
-        firstName: data.body?.firstName || null,
-        lastName: data.body?.lastName || null,
-        token: data.body?.token,
-      };
+      console.log("Login response:", data);
 
-      dispatch(login(user));
+      const token = data.body?.token;
+      if (!token) {
+        throw new Error('Token missing in response');
+      }
 
+      // Dispatch login avec le token
+      dispatch(login({ token, rememberMe }));
+
+      // 2. Profile request - Changé en GET
       const profileResponse = await fetch('http://localhost:3001/api/v1/user/profile', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${data.body.token}`,
+        method: 'GET', // Changé de POST à GET
+        headers: { 
+          Authorization: `Bearer ${token}`, 
+          'Content-Type': 'application/json' 
         },
       });
 
@@ -56,18 +65,18 @@ const SignIn = () => {
       }
 
       const profileData = await profileResponse.json();
-      dispatch(setUserProfile(profileData.body));
+      console.log("Profile Data:", profileData.body);
 
-      if (rememberMe) {
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', data.body.token);
-      } else {
-        sessionStorage.setItem('user', JSON.stringify(user));
-        sessionStorage.setItem('token', data.body.token);
-      }
+      // Assure-toi que le username est correctement extrait
+      const userProfile = {
+        ...profileData.body,
+        username: profileData.body.userName || profileData.body.username || 'User'
+      };
 
+      dispatch(setUserProfile(userProfile));
       navigate('/user');
     } catch (error) {
+      console.error("Login Error:", error);
       setErrorMessage(error.message);
       dispatch(setError(error.message));
     }
@@ -85,7 +94,7 @@ const SignIn = () => {
             <input
               type="email"
               id="email"
-              value={email}
+              value={email || ""}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -94,7 +103,7 @@ const SignIn = () => {
             <input
               type="password"
               id="password"
-              value={password}
+              value={password || ""}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
