@@ -40,7 +40,6 @@ const userSlice = createSlice({
     setUserProfile: (state, action) => {
       state.user = { ...state.user, ...action.payload };
       
-      // Met à jour le stockage approprié
       if (localStorage.getItem('user')) {
         localStorage.setItem('user', JSON.stringify(state.user));
       } else if (sessionStorage.getItem('user')) {

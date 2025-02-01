@@ -41,7 +41,7 @@ const User = () => {
         const updatedUser = {
           ...user,
           userName: data.body.userName,
-          username: data.body.userName, // Ajout de username pour la NavBar
+          username: data.body.userName,
         };
   
         dispatch(setUserProfile(updatedUser));
@@ -90,7 +90,6 @@ const User = () => {
       <h2 className="sr-only">Accounts</h2>
 
       <section className="account">
-        {/* Le reste du code reste inchangé */}
         <div className="account-content-wrapper">
           <h3 className="account-title">Argent Bank Checking (x8349)</h3>
           <p className="account-amount">$2,082.79</p>

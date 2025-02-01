@@ -29,7 +29,6 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      // 1. Login request
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -48,12 +47,10 @@ const SignIn = () => {
         throw new Error('Token missing in response');
       }
 
-      // Dispatch login avec le token
       dispatch(login({ token, rememberMe }));
 
-      // 2. Profile request - Changé en GET
       const profileResponse = await fetch('http://localhost:3001/api/v1/user/profile', {
-        method: 'GET', // Changé de POST à GET
+        method: 'GET',
         headers: { 
           Authorization: `Bearer ${token}`, 
           'Content-Type': 'application/json' 
@@ -67,7 +64,6 @@ const SignIn = () => {
       const profileData = await profileResponse.json();
       console.log("Profile Data:", profileData.body);
 
-      // Assure-toi que le username est correctement extrait
       const userProfile = {
         ...profileData.body,
         username: profileData.body.userName || profileData.body.username || 'User'
