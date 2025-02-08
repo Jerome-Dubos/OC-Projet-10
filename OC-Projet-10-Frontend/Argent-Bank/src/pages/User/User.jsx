@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserProfile } from '../../store/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { setPseudo } from '../../store/userSlice';
 import './User.css';
 
 const User = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const [isEditing, setIsEditing] = useState(false);
   const [userName, setUserName] = useState(user?.userName || '');
 
   useEffect(() => {
     setUserName(user?.userName || '');
+    console.log(userName);
+    
   }, [user]);
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')){
+      navigate('/signIn');
+    }
+  })
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -24,7 +34,7 @@ const User = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
           userName,
@@ -43,8 +53,9 @@ const User = () => {
           userName: data.body.userName,
           username: data.body.userName,
         };
+  console.log(updatedUser.userName);
   
-        dispatch(setUserProfile(updatedUser));
+        dispatch(setPseudo(updatedUser.userName));
         setUserName(updatedUser.userName);
         setIsEditing(false);
       }

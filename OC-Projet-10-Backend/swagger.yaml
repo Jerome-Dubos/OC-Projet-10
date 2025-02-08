@@ -65,8 +65,6 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -101,6 +99,73 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions
+      summary: Retrieve all transactions for the current month
+      parameters:
+        - in: query
+          name: accountId
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Transactions retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Account ID
+        '500':
+          description: Internal Server Error
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions
+      summary: Get details of a specific transaction
+      parameters:
+        - in: path
+          name: transactionId
+          type: string
+          required: true
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Transaction ID
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions
+      summary: Update transaction details
+      parameters:
+        - in: path
+          name: transactionId
+          type: string
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      responses:
+        '200':
+          description: Transaction updated successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -111,27 +176,20 @@ definitions:
     properties:
       email:
         type: string
-        description: user email
       password:
         type: string
-        description: user password
       firstName:
         type: string
-        description: user first name
       lastName:
         type: string
-        description: user last name
       userName:
         type: string
-        description: user public name
   Login:
     properties:
       email:
         type: string
-        description: user email
       password:
         type: string
-        description: user password
   ApiResponse:
     type: object
     properties:
@@ -141,11 +199,6 @@ definitions:
         type: string
       body:
         type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
   LoginResponse:
     type: object
     properties:
@@ -155,4 +208,30 @@ definitions:
     type: object
     properties:
       userName:
+        type: string
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+      accountId:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+      balance:
+        type: number
+      category:
+        type: string
+      note:
+        type: string
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+      note:
         type: string

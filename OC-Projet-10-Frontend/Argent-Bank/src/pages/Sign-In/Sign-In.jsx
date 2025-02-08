@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, setUserProfile, setError, loadUserFromStorage } from '../../store/userSlice';
+import { login } from '../../store/userSlice';
 import { useNavigate } from 'react-router-dom';
 import './Sign-In.css';
 
@@ -14,9 +14,7 @@ const SignIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setErrorMessage] = useState(null);
 
-  useEffect(() => {
-    dispatch(loadUserFromStorage());
-  }, [dispatch]);
+
 
   useEffect(() => {
     if (user) {
@@ -47,7 +45,7 @@ const SignIn = () => {
         throw new Error('Token missing in response');
       }
 
-      dispatch(login({ token, rememberMe }));
+      localStorage.setItem('token', token);
 
       const profileResponse = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'GET',
@@ -68,13 +66,12 @@ const SignIn = () => {
         ...profileData.body,
         username: profileData.body.userName || profileData.body.username || 'User'
       };
+// console.log(userProfile);
 
-      dispatch(setUserProfile(userProfile));
+      dispatch(login(userProfile));
       navigate('/user');
     } catch (error) {
       console.error("Login Error:", error);
-      setErrorMessage(error.message);
-      dispatch(setError(error.message));
     }
   };
 
