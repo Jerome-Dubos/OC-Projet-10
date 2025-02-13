@@ -10,7 +10,7 @@ const User = () => {
   const user = useSelector((state) => state.user);
 
   const [isEditing, setIsEditing] = useState(false);
-  const [userName, setUserName] = useState(user?.userName || '');
+  const [userName, setUserName] = useState(user?.userName || 'user');
 
   useEffect(() => {
     setUserName(user?.userName || 'user');
