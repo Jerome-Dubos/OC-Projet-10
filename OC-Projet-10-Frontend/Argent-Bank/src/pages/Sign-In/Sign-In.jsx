@@ -38,7 +38,6 @@ const SignIn = () => {
       }
 
       const data = await response.json();
-      console.log("Login response:", data);
 
       const token = data.body?.token;
       if (!token) {
@@ -60,18 +59,18 @@ const SignIn = () => {
       }
 
       const profileData = await profileResponse.json();
-      console.log("Profile Data:", profileData.body);
 
       const userProfile = {
         ...profileData.body,
         username: profileData.body.userName || profileData.body.username || 'User'
       };
-// console.log(userProfile);
+
 
       dispatch(login(userProfile));
       navigate('/user');
     } catch (error) {
       console.error("Login Error:", error);
+      setErrorMessage(error.message);
     }
   };
 

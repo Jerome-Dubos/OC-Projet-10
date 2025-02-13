@@ -13,9 +13,7 @@ const User = () => {
   const [userName, setUserName] = useState(user?.userName || '');
 
   useEffect(() => {
-    setUserName(user?.userName || '');
-    console.log(userName);
-    
+    setUserName(user?.userName || 'user');
   }, [user]);
 
   useEffect(() => {
@@ -53,8 +51,7 @@ const User = () => {
           userName: data.body.userName,
           username: data.body.userName,
         };
-  console.log(updatedUser.userName);
-  
+
         dispatch(setPseudo(updatedUser.userName));
         setUserName(updatedUser.userName);
         setIsEditing(false);
@@ -65,7 +62,7 @@ const User = () => {
   };
 
   const handleCancelClick = () => {
-    setUserName(user?.userName || '');
+    setUserName(user?.userName || 'user');
     setIsEditing(false);
   };
 

@@ -17,7 +17,6 @@ const NavBar = () => {
     localStorage.removeItem('token');
     navigate('/');
   };
-console.log(user);
 
   const displayName = user?.userName || 'User';
 
