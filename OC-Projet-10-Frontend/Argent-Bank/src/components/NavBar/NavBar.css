@@ -18,11 +18,11 @@
   text-decoration: none;
   margin-right: 0.5rem;
   font-weight: bold;
-  color: #2c3e50; /* Assure que le texte est de la même couleur que les liens */
-  background: transparent; /* Supprime le fond par défaut */
-  border: none; /* Enlève la bordure par défaut */
-  cursor: pointer; /* Changer le curseur pour indiquer un élément cliquable */
-  padding: 10px 15px; /* Ajoute du padding pour l'espacement */
+  color: #2c3e50; 
+  background: transparent; 
+  border: none; 
+  cursor: pointer;
+  padding: 10px 15px; 
 }
 
 .main-nav-item i {
@@ -31,7 +31,7 @@
 
 .main-nav-item:hover {
   text-decoration: underline;
-  color: #42b983; /* Change la couleur du texte lors du survol */
+  color: #42b983; 
 }
 
 .main-nav-logo {

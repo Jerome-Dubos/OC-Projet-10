@@ -11,17 +11,17 @@ const Error = () => {
     if (sceneRef.current) {
       const parallaxInstance = new Parallax(sceneRef.current);
 
-      // Cleanup function to destroy Parallax instance when component unmounts
+
       return () => {
         parallaxInstance.destroy();
       };
     }
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <div className="error-page">
 
-      {/* Main Content */}
+
       <section className="wrapper">
         <div className="container">
           <div ref={sceneRef} className="scene" data-hover-only="false">
