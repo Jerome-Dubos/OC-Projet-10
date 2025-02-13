@@ -228,6 +228,8 @@ definitions:
         type: string
       note:
         type: string
+      transactionType:
+        type: string
   TransactionUpdate:
     type: object
     properties:
