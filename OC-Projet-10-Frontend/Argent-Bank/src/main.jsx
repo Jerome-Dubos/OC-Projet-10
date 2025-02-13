@@ -7,6 +7,7 @@ import Error from './components/Error/Error';
 import Home from './pages/Home/Home';
 import SignIn from './pages/Sign-In/Sign-In';
 import User from './pages/User/User';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { store } from './store/store';
 
 const router = createBrowserRouter([
@@ -16,8 +17,8 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { path: '/', element: <Home /> },
-      { path: 'signIn', element: <SignIn /> },
-      { path: 'user', element: <User /> },
+      { path: '/signIn', element: <SignIn /> },
+      { path: '/user', element: <ProtectedRoute><User /></ProtectedRoute> }
     ],
   },
 ]);

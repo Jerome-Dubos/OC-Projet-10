@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "icon": "icon-chat.webp",
+      "title": "You are our #1 priority",
+      "description": "Get in touch through our 24/7 chat or phone."
+    },
+    {
+      "id": 2,
+      "icon": "icon-money.webp",
+      "title": "More savings means higher rates",
+      "description": "The more you save, the higher your rate."
+    },
+    {
+      "id": 3,
+      "icon": "icon-security.webp",
+      "title": "Security you can trust",
+      "description": "Top encryption keeps your data and money safe."
+    }
+  ]

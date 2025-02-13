@@ -3,12 +3,6 @@
     flex-direction: column;
 }
 
-@media (min-width: 920px) {
-    .features {
-        flex-direction: row;
-    }
-}
-
 .feature-icon {
     width: 100px;
     border: 10px solid #00bc77;
@@ -26,4 +20,10 @@
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+}
+
+@media (min-width: 920px) {
+    .features {
+        flex-direction: row;
+    }
 }
