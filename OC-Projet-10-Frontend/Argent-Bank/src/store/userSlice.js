@@ -13,10 +13,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      return { ...action.payload }; // Retourner un nouvel objet pour mettre à jour l'état
+      return { ...action.payload };
     },
     logout: () => {
-      return { ...initialState }; // Réinitialiser l'état au logout
+      return { ...initialState };
     },
     setPseudo: (state, action) => {
       state.userName = action.payload;
